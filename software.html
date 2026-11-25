@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>mm-neuro · Sheethal Bhat</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="mm-neuro: an open, configuration-driven evaluation harness for neuroimaging phenotype prediction, with leakage-safe cross-validation.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,650&family=Public+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <a class="brand" href="./">Sheethal Bhat</a>
+  <nav class="nav" aria-label="Main">
+    <a href="./">Home</a>
+    <a href="research/harness.html">Benchmark</a>
+    <a href="research/dmn.html">Network dynamics</a>
+    <a href="research/multimodal.html">Multimodal</a>
+    <a href="software.html" aria-current="page">Software</a>
+    <a href="./#publications">Medical imaging AI</a>
+    <a href="./#students">Students</a>
+    <a href="experience.html">Experience</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="eyebrow">Software · open source · Apache-2.0</div>
+  <h1>mm-neuro</h1>
+  <p class="lede">A small, configuration-driven evaluation harness for predicting phenotypes from neuroimaging. One
+  YAML file describes an experiment, and the runner makes sure nothing from the test subjects leaks into training.</p>
+  <p><a href="https://github.com/sheethalb/mmneuro"><strong>github.com/sheethalb/mmneuro</strong></a></p>
+
+  <h2>Why it exists</h2>
+  <p>Reproducibility checks in neuroimaging are usually one-off scripts that re-implement cross-validation, site
+  harmonisation, confidence intervals and reporting each time, and small differences between them make results hard to
+  compare. mm-neuro packages that work once, so the same evaluation can be pointed at a new cohort, target, model or
+  preprocessing pipeline by editing a configuration file. It was built for the
+  <a href="research/harness.html">connectivity benchmark</a> and is being extended to other neuroimaging projects.</p>
+
+  <h2>How it works</h2>
+  <figure>
+    <img src="assets/harness_architecture.png" alt="mm-neuro architecture: cohort-specific preprocessing feeds a dataset manifest; an experiment config selects replaceable parts; the runner, for every split, fits features and harmonizer on training data only, cleans, fits the model and scores test predictions; standard outputs are written." width="1160" height="1451" loading="lazy" class="figimg">
+    <figcaption>Every part is a small class chosen by name in a YAML file. For every split, the runner fits group-level
+    features and the harmonizer on training subjects only, then fits the model and scores the test subjects.</figcaption>
+  </figure>
+
+  <h2>An experiment configuration</h2>
+  <p>Changing the cohort, model or protocol is a one-line edit. Replacing the protocol with
+  <code>{type: loso, group_column: site}</code>, for example, turns a k-fold run into leave-one-site-out.</p>
+<pre><code>dataset:    {file: configs/datasets/adni_full.yaml}
+harmonizer: {type: combat, batch_column: tr, batch_rule: tr_group, protected: [diagnosis]}
+features:   []
+model:      {type: cpm, p_thresh: 0.01}
+task:       {type: regression, targets: [mmse_mmscore, adas_total13]}
+protocol:   {type: kfold, splits: "splits/split_cv_fold{fold}.csv"}
+stats:      [bootstrap_ci]
+figures:    [group_metrics, pred_vs_true]
+output_dir: work_dirs/cpm_adni_kfold</code></pre>
+
+  <h2>Components</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Part</th><th>Available</th></tr></thead>
+    <tbody>
+      <tr><td>Dataset</td><td>Manifest of per-subject feature files with target and covariate tables</td></tr>
+      <tr><td>Harmonizer</td><td>None, ComBat (fitted per training split)</td></tr>
+      <tr><td>Model</td><td>CPM, PLSR, SVR, group-ICA regression, graph curvature, ridge, logistic regression, neural models, including faithful variants of published methods</td></tr>
+      <tr><td>Task</td><td>Regression, classification</td></tr>
+      <tr><td>Protocol</td><td>k-fold with versioned split files, leave-one-out, leave-one-site-out, sample-size curves</td></tr>
+      <tr><td>Statistics</td><td>Bootstrap confidence intervals, permutation tests on pooled predictions</td></tr>
+      <tr><td>Reporting</td><td>Metrics per fold or site, within covariate strata (scanner, site, age, sex), standard figures</td></tr>
+    </tbody>
+  </table></div>
+  <p>Adding a new part means writing one small class and registering it by name.</p>
+
+  <h2>Using it</h2>
+<pre><code>pip install --no-deps --no-build-isolation -e .
+mm-neuro list                       # every registered part, figure and statistic
+mm-neuro check  configs/examples/adni_cpm_kfold_stratified.yaml
+mm-neuro run    configs/examples/adni_cpm_kfold_stratified.yaml</code></pre>
+  <ul>
+    <li><strong>Every run writes</strong> its configuration, every test prediction, per-fold metrics, a summary with the
+    code version, a log and the configured figures.</li>
+    <li><strong>Built-in checks:</strong> unit tests confirm that no harmonizer or group-level feature ever sees a test
+    subject, and a reference script reruns the benchmark's numbers after any change to the core.</li>
+  </ul>
+
+  <h2>Citation</h2>
+<pre><code>@software{bhat_mmneuro_2026,
+  author  = {Bhat, Sheethal},
+  title   = {mm-neuro},
+  year    = {2026},
+  url     = {https://github.com/sheethalb/mmneuro}
+}</code></pre>
+  <p class="small muted">A paper describing mm-neuro is in preparation.</p>
+</main>
+
+<footer><div class="wrap">
+  <p>Text licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; the software is
+  Apache-2.0.</p>
+</div></footer>
+</body>
+</html>

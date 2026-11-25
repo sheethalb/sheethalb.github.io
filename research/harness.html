@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Connectivity Benchmark · Sheethal Bhat</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Published resting-state fMRI methods for predicting cognition, reproduced under one leakage-safe protocol, with the mm-neuro evaluation harness.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,650&family=Public+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <a class="brand" href="../">Sheethal Bhat</a>
+  <nav class="nav" aria-label="Main">
+    <a href="../">Home</a>
+    <a href="harness.html" aria-current="page">Benchmark</a>
+    <a href="dmn.html">Network dynamics</a>
+    <a href="multimodal.html">Multimodal</a>
+    <a href="../software.html">Software</a>
+    <a href="../#publications">Medical imaging AI</a>
+    <a href="../#students">Students</a>
+    <a href="../experience.html">Experience</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="eyebrow">Research · resting-state fMRI · reproducibility</div>
+  <h1>Benchmarking brain-connectivity prediction</h1>
+  <p class="lede">Papers that predict cognitive scores from resting-state functional connectivity often report strong
+  effects, usually from small samples evaluated with leave-one-out cross-validation. This project re-runs those methods
+  on larger cohorts under one shared, leakage-safe protocol, to measure how large the effects are when every method is
+  evaluated the same way.</p>
+  <p>The second aim is practical. Each reproducibility check is usually a one-off script that re-implements
+  cross-validation, harmonisation and reporting. The project packages that work as a reusable harness,
+  <a href="../software.html">mm-neuro</a>, so the same evaluation can be pointed at a new cohort, target or pipeline by
+  changing a configuration file.</p>
+
+  <h2>Cohorts and targets</h2>
+  <dl class="defs">
+    <dt>ADNI</dt><dd>Older adults across the Alzheimer's spectrum (cognitively normal, mild cognitive impairment,
+    dementia), multi-site, one resting-state scan per person. Targets: MMSE and ADAS-Cog13.</dd>
+    <dt>ABIDE-I</dt><dd>Autism and typically developing participants from many sites. Targets: full-scale, verbal and
+    performance IQ, and diagnosis. Used to test whether the harness transfers to a different domain.</dd>
+    <dt>OASIS-3</dt><dd>A second Alzheimer's cohort with MMSE and the Clinical Dementia Rating, being added as an
+    independent test.</dd>
+  </dl>
+  <p class="small muted">Functional connectivity is the only predictive input. The T1 scan is used only for
+  registration; no structural features enter any model.</p>
+
+  <h2 id="pipelines">Preprocessing</h2>
+  <p>The main pipeline keeps the functional data in each person's native space and moves the atlas instead:</p>
+  <ol>
+    <li>T1: bias-field correction, deep-learning skull stripping (HD-BET), affine registration to MNI space.</li>
+    <li>fMRI: dummy volumes dropped, rigid motion correction, brain mask.</li>
+    <li>Rigid registration of the mean fMRI image to the person's T1.</li>
+    <li>The Schaefer-200 atlas, first aligned to the project's template, is warped into each person's fMRI space, and one
+    time series is taken per region.</li>
+    <li>Denoising: white-matter and CSF signals plus five aCompCor components, detrending, 0.01–0.1 Hz band-pass, and
+    censoring of high-motion volumes.</li>
+    <li>Connectivity: Pearson correlation between all region pairs, Fisher-z transformed.</li>
+  </ol>
+  <p>The same scans are also processed with three widely used alternatives, to measure how much the choice of
+  preprocessing changes connectivity:</p>
+  <div class="tbl"><table>
+    <thead><tr><th>Pipeline</th><th>Main steps</th></tr></thead>
+    <tbody>
+      <tr><td>DeepPrep</td><td>fMRIPrep-style motion correction, coregistration and normalisation to MNI; motion,
+      WM/CSF and aCompCor regression; band-pass; motion censoring</td></tr>
+      <tr><td>SPM12 + CONN</td><td>CONN's default MNI preprocessing; default denoising with aCompCor and ART scrubbing;
+      ROI-to-ROI connectivity</td></tr>
+      <tr><td>FSL + ICA-AROMA</td><td>MCFLIRT, slice-timing correction, boundary-based and nonlinear registration to MNI,
+      smoothing, ICA-AROMA, WM/CSF regression, band-pass</td></tr>
+    </tbody>
+  </table></div>
+  <p class="small muted">All four end in the same atlas and the same set of connections, so differences come from
+  preprocessing alone. Agreement is measured within subject, per connection (ICC), per network block, for group
+  differences and for residual motion effects.</p>
+
+  <h2>Methods reproduced</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Method</th><th>Original work</th><th>Features</th></tr></thead>
+    <tbody>
+      <tr><td>Connectome-based predictive modelling (CPM)</td><td>Lin et al., 2018; protocol of Shen et al., 2017</td><td>Edge selection by correlation with the target, summed network strength</td></tr>
+      <tr><td>Partial least squares regression</td><td>Meskaldji et al., 2016</td><td>Accordance and discordance connectivity</td></tr>
+      <tr><td>Group ICA + feature selection + robust linear regression</td><td>Duc et al., 2020</td><td>Component time courses from group ICA fitted inside each fold</td></tr>
+      <tr><td>Linear support vector regression</td><td>Hua et al., 2023; Yang et al., 2025</td><td>Group atlas and individualised parcellation</td></tr>
+      <tr><td>Forman–Ricci curvature</td><td>Adapted from a descriptive study</td><td>Curvature of each person's thresholded connectivity graph</td></tr>
+    </tbody>
+  </table></div>
+  <p>These are compared with simple baselines (cohort mean, ridge regression, gradient-boosted trees, demographics
+  only) and with the project's own encoders (an MLP on connectivity, and graph neural networks). Where a paper's exact
+  setup can be matched, a <em>faithful</em> variant is run as well, with the original atlas, target and leave-one-out
+  cross-validation.</p>
+
+  <h2>Evaluation protocol</h2>
+  <dl class="defs">
+    <dt>Fixed splits</dt><dd>Five-fold cross-validation with versioned split files; every subject is tested exactly
+    once, and folds are stratified by diagnosis (ADNI) or site (ABIDE).</dd>
+    <dt>No leakage</dt><dd>Site harmonisation (ComBat) and any group-level features such as ICA are fitted on the
+    training subjects of each fold only. The validation set is used only to choose hyperparameters. Unit tests check
+    that no test subject reaches these steps.</dd>
+    <dt>Leave one site out</dt><dd>On ABIDE, each sufficiently large site is held out in turn, so the model is tested
+    on a scanner and population it has never seen.</dd>
+    <dt>Sample size</dt><dd>Repeated random subsamples at the original studies' sample sizes and a sweep over sample
+    sizes, with method and protocol held fixed, show how much estimates vary at small N.</dd>
+    <dt>Statistics</dt><dd>Corrected resampled t-tests for paired fold comparisons, permutation tests on the
+    correlation of pooled predictions, and bootstrap confidence intervals on explained variance.</dd>
+  </dl>
+
+  <h2 id="mm-neuro">Software</h2>
+  <p>The whole evaluation runs through <strong>mm-neuro</strong>, an open, configuration-driven harness. Its design,
+  configuration format and components are described on the <a href="../software.html">software page</a>.</p>
+
+  <p class="note">A first paper from this work, <em>Scan–Rescan Reliability of Individualized Network Attribution in
+  Resting-State Functional MRI</em>, is accepted for oral presentation at BVM 2027. A paper on the benchmark and the
+  harness is in preparation. Results will be added here once they are published.</p>
+</main>
+
+<footer><div class="wrap">
+  <p>Data: Alzheimer's Disease Neuroimaging Initiative (ADNI), Autism Brain Imaging Data Exchange (ABIDE-I) and OASIS-3.
+  This page describes aims and methods only.</p>
+</div></footer>
+</body>
+</html>

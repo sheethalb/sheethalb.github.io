@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Network Dynamics in Alzheimer's · Sheethal Bhat</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Which resting-state fMRI network measures differ in Alzheimer's disease, and which survive confound control, other parcellations, other pipelines and an independent cohort.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,650&family=Public+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <a class="brand" href="../">Sheethal Bhat</a>
+  <nav class="nav" aria-label="Main">
+    <a href="../">Home</a>
+    <a href="harness.html">Benchmark</a>
+    <a href="dmn.html" aria-current="page">Network dynamics</a>
+    <a href="multimodal.html">Multimodal</a>
+    <a href="../software.html">Software</a>
+    <a href="../#publications">Medical imaging AI</a>
+    <a href="../#students">Students</a>
+    <a href="../experience.html">Experience</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <div class="eyebrow">Research · resting-state fMRI · Alzheimer's disease</div>
+  <h1>Network dynamics in Alzheimer's disease</h1>
+  <p class="lede">Many studies report that brain network dynamics, and the default mode network in particular, change
+  in Alzheimer's disease. Few test those claims together against motion and other confounds, the choice of brain atlas,
+  the preprocessing pipeline, global signal and arousal, measurement reliability, and a second cohort. This study does
+  that, with every analysis written down and locked before it is run.</p>
+
+  <h2>Design</h2>
+  <figure>
+    <div class="svgwrap">
+      <svg viewBox="0 0 900 200" role="img" aria-label="Study design: analysis plan locked, measures computed in ADNI, a replication protocol locked before any OASIS-3 data, the same code applied to OASIS-3, then robustness checks in both cohorts.">
+        <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahf"/></marker></defs>
+        <rect x="10" y="60" width="150" height="70" rx="6" class="box"/><text x="85" y="88" class="bt">Analysis plan</text><text x="85" y="106" class="bs">dated, locked;</text><text x="85" y="120" class="bs">changes = amendments</text>
+        <line x1="160" y1="95" x2="186" y2="95" class="ar"/>
+        <rect x="190" y="60" width="150" height="70" rx="6" class="box acc"/><text x="265" y="88" class="bt">ADNI</text><text x="265" y="106" class="bs">discovery cohort,</text><text x="265" y="120" class="bs">multi-site</text>
+        <line x1="340" y1="95" x2="366" y2="95" class="ar"/>
+        <rect x="370" y="60" width="150" height="70" rx="6" class="box"/><text x="445" y="88" class="bt">Replication rule</text><text x="445" y="106" class="bs">locked before any</text><text x="445" y="120" class="bs">OASIS-3 feature</text>
+        <line x1="520" y1="95" x2="546" y2="95" class="ar"/>
+        <rect x="550" y="60" width="150" height="70" rx="6" class="box acc"/><text x="625" y="88" class="bt">OASIS-3</text><text x="625" y="106" class="bs">same code, same</text><text x="625" y="120" class="bs">parameters, no retuning</text>
+        <line x1="700" y1="95" x2="726" y2="95" class="ar"/>
+        <rect x="730" y="60" width="160" height="70" rx="6" class="box"/><text x="810" y="88" class="bt">Robustness</text><text x="810" y="106" class="bs">atlases, pipelines,</text><text x="810" y="120" class="bs">GSR, arousal, reliability</text>
+        <text x="10" y="35" class="lane">EVERY NEW ANALYSIS RUNS IN BOTH COHORTS</text>
+      </svg>
+    </div>
+    <figcaption>ADNI is the discovery cohort; OASIS-3 is used for confirmation with an effect direction and a decision
+    rule fixed in advance. The plan is an internal, dated and version-controlled lock rather than an external
+    registration.</figcaption>
+  </figure>
+
+  <h2>Cohorts and data</h2>
+  <ul>
+    <li><strong>ADNI</strong> (discovery): cognitively normal, mild cognitive impairment and dementia groups from the
+    clinical diagnosis at the scan; one resting-state scan per person, several sites and acquisition protocols.</li>
+    <li><strong>OASIS-3</strong> (confirmation): one centre; groups from the Clinical Dementia Rating at the nearest
+    assessment (normal, very mild impairment, dementia).</li>
+    <li><strong>Amyloid-defined groups</strong> from PET are used in a further analysis, so that "Alzheimer's" can mean
+    biology and not only clinical diagnosis.</li>
+    <li>Both cohorts go through the same in-house preprocessing (described on the
+    <a href="harness.html#pipelines">benchmark page</a>), with the Schaefer-200 atlas and the seven Yeo networks; the
+    default mode network is further split into anterior, posterior and temporal subregions.</li>
+  </ul>
+
+  <h2>What is measured</h2>
+  <h3>Phase dynamics</h3>
+  <dl class="defs">
+    <dt>Metastability</dt><dd>How much the synchrony of brain regions varies over time: the variability of the
+    Kuramoto order parameter of band-limited phase signals, for the whole brain, each network and each default-mode
+    subregion.</dd>
+    <dt>Leave-one-network-out</dt><dd>How much one network contributes to whole-brain metastability, measured by
+    recomputing it without that network.</dd>
+    <dt>Phase states</dt><dd>Recurring whole-brain phase-coupling patterns (leading-eigenvector dynamics analysis):
+    how often each occurs and how long it lasts.</dd>
+    <dt>Intrinsic ignition</dt><dd>How widely activity spreads after a region's spontaneous events, and how variable
+    that spread is, following the published reference implementation.</dd>
+  </dl>
+  <h3>Connectivity and graph structure</h3>
+  <dl class="defs">
+    <dt>Participation</dt><dd>Whether a default-mode region's connections stay inside its network or spread to
+    others.</dd>
+    <dt>Efficiency and path length</dt><dd>How easily signals travel within the default mode network.</dd>
+    <dt>Anticorrelation</dt><dd>The strength of negative connections among default-mode regions.</dd>
+    <dt>Further measures</dt><dd>Hub disruption, salience-network coupling, modularity, rich-club organisation and
+    hippocampus/amygdala coupling, each listed in the plan before being computed.</dd>
+  </dl>
+  <h3>Clinical links</h3>
+  <p>Associations with dementia severity, cognitive composites, amyloid and tau, and longitudinal decline, using
+  cross-validated models for prediction.</p>
+
+  <h2>Safeguards</h2>
+  <dl class="defs">
+    <dt>Fixed primary measures</dt><dd>A small set of primary measures and regions is fixed in advance; anything added
+    later is labelled exploratory, and a failed step is reported, not rescued.</dd>
+    <dt>Confounds</dt><dd>Nested models add age, sex, head motion, education, data retained after motion censoring,
+    acquisition protocol or scanner, site, and brain atrophy.</dd>
+    <dt>Permutation tests</dt><dd>Group effects are tested by Freedman–Lane permutation within the covariate model,
+    with effect sizes from the same model and false-discovery control within each family.</dd>
+    <dt>Size-matched nulls</dt><dd>Random sets of regions of the same size test whether a network is special or simply
+    reflects how many regions it has.</dd>
+    <dt>Robustness</dt><dd>Global signal regression, an fMRI-based arousal estimate, physiological aliasing per
+    protocol, five parcellations (Schaefer-200 and -400, Shen-268, AAL3, Dosenbach-160) plus group ICA and
+    personalised parcellations, and an alternative preprocessing pipeline (DeepPrep).</dd>
+    <dt>Reliability and integrity</dt><dd>Split-half and test–retest reliability; unit tests on simulated oscillators;
+    an independent second implementation for headline numbers; every reported number traced to its source file.</dd>
+  </dl>
+
+  <p class="note">This study is in preparation for journal submission. Findings will be added here once published.</p>
+</main>
+
+<footer><div class="wrap">
+  <p>Data: Alzheimer's Disease Neuroimaging Initiative (ADNI) and OASIS-3. This page describes aims and methods only.</p>
+</div></footer>
+</body>
+</html>

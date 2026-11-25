@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sheethal Bhat</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Sheethal Bhat, Pattern Recognition Lab, FAU Erlangen-Nürnberg: neuroimaging in neurodegenerative disease, vision-language models and detection for medical imaging, reproducible evaluation.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,650&family=Public+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<header class="bar"><div class="bar-in">
+  <a class="brand" href="./">Sheethal Bhat</a>
+  <nav class="nav" aria-label="Main">
+    <a href="./" aria-current="page">Home</a>
+    <a href="research/harness.html">Benchmark</a>
+    <a href="research/dmn.html">Network dynamics</a>
+    <a href="research/multimodal.html">Multimodal</a>
+    <a href="software.html">Software</a>
+    <a href="#publications">Medical imaging AI</a>
+    <a href="#students">Students</a>
+    <a href="experience.html">Experience</a>
+  </nav>
+</div></header>
+
+<main class="wrap">
+  <section class="intro">
+  <div class="who">
+    <div class="eyebrow">Pattern Recognition Lab · FAU Erlangen-Nürnberg</div>
+    <h1>Sheethal Bhat</h1>
+    <p class="role">Dr.-Ing. · Research Associate · Junior Group Head of the LAMBDA colloquium (Learning Approaches
+    for Medical Big Data Analysis)</p>
+    <p>I work on machine learning for medical imaging. My current focus is the brain: what resting-state
+    fMRI can and cannot tell us about cognition in aging and Alzheimer's disease, how to learn from MRI when other
+    modalities are only partly available, and how to evaluate such models so that the results hold up.</p>
+    <p>Before moving to neuroimaging I worked on chest X-ray and mammography AI: vision-language models, zero-shot
+    classification and detection with few annotations, at Siemens Healthineers and the Pattern Recognition Lab. Earlier
+    I spent several years in industry as an imaging systems architect at Intel and a software developer at IBM.</p>
+  </div>
+  <img class="portrait" src="assets/sheethal-bhat.jpg" alt="Portrait of Sheethal Bhat" width="720" height="611">
+  </section>
+
+  <nav class="tiles" aria-label="Sections">
+    <button class="tile" type="button" data-panel="areas" aria-controls="areas">
+      <span class="tile-t">Research areas</span>
+      <span class="tile-d">Neuroimaging · vision-language models · detection across modalities</span>
+      <span class="tile-go" aria-hidden="true">Open</span>
+    </button>
+    <button class="tile" type="button" data-panel="research" aria-controls="research">
+      <span class="tile-t">Neurodegenerative disease research</span>
+      <span class="tile-d">Three projects on resting-state fMRI and MRI in Alzheimer's disease, and the latest paper</span>
+      <span class="tile-go" aria-hidden="true">Open</span>
+    </button>
+    <button class="tile" type="button" data-panel="publications" aria-controls="publications">
+      <span class="tile-t">Medical imaging AI</span>
+      <span class="tile-d">Chest X-ray and mammography AI papers</span>
+      <span class="tile-go" aria-hidden="true">Open</span>
+    </button>
+    <button class="tile" type="button" data-panel="students" aria-controls="students">
+      <span class="tile-t">Student work</span>
+      <span class="tile-d">20+ students supervised, and the papers they led</span>
+      <span class="tile-go" aria-hidden="true">Open</span>
+    </button>
+    <a class="tile" href="software.html">
+      <span class="tile-t">Software</span>
+      <span class="tile-d">mm-neuro, an open evaluation harness for neuroimaging prediction</span>
+      <span class="tile-go" aria-hidden="true">Go to page</span>
+    </a>
+    <a class="tile" href="experience.html">
+      <span class="tile-t">Experience and education</span>
+      <span class="tile-d">Siemens Healthineers, Intel, Carnegie Mellon, IBM, and degrees</span>
+      <span class="tile-go" aria-hidden="true">Go to page</span>
+    </a>
+  </nav>
+
+  <h2 id="contact" class="contact-h">Contact</h2>
+  <p>Pattern Recognition Lab, Friedrich-Alexander-Universität Erlangen-Nürnberg, Martensstraße 3, 91058 Erlangen,
+  Germany. Contact details are on my <a href="https://lme.tf.fau.de/persons/sheethal-bhat/">lab profile</a>; code is on
+  <a href="https://github.com/sheethalb">GitHub</a>.</p>
+</main>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Section" hidden>
+  <div class="sheet-bar"><div class="sheet-bar-in">
+    <span class="sheet-name">Sheethal Bhat</span>
+    <button class="sheet-close" type="button" id="sheet-close" aria-label="Close section">Close ✕</button>
+  </div></div>
+  <div class="sheet-body wrap">
+
+    <section class="panel" id="areas" aria-labelledby="areas-h" hidden>
+      <h2 id="areas-h">Research areas</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="tags">rs-fMRI · structural MRI · Alzheimer's disease</div>
+          <h3><a href="#research">Neuroimaging and neurodegeneration</a></h3>
+          <p>Brain connectivity and network dynamics in ageing and dementia, multimodal MRI models trained with partly
+          available clinical and PET data, and evaluation methods that make such findings reproducible.</p>
+        </article>
+        <article class="card">
+          <div class="tags">CLIP · zero-shot · health records · report generation</div>
+          <h3><a href="#publications">Vision-language models for medicine</a></h3>
+          <p>Learning from images paired with clinical text instead of manual labels: zero-shot chest X-ray
+          classification, rare-finding recognition, and retrieval-augmented diagnosis and reporting.</p>
+        </article>
+        <article class="card">
+          <div class="tags">detection · grounding · segmentation</div>
+          <h3><a href="#students">Detection and localisation across modalities</a></h3>
+          <p>Finding and outlining lesions and organs with few annotations, in mammography, chest X-ray, angiography, CT
+          and MRI, using example- and text-guided detectors.</p>
+        </article>
+      </div>
+      <p>The common thread is making medical-imaging AI usable in practice: models that need fewer manual labels, work
+      across scanners, sites and patient groups, and are evaluated in ways that predict how they will behave outside the
+      dataset they were built on.</p>
+      <div class="area-text">
+        <section>
+          <h3>Neuroimaging and neurodegeneration</h3>
+          <p>My current work asks what brain imaging can reliably tell us about cognition in ageing and Alzheimer's
+          disease. With resting-state fMRI, I study how functional networks and their dynamics change across the disease,
+          and test published claims under one shared, leakage-safe evaluation across cohorts (ADNI, OASIS-3, ABIDE) and
+          preprocessing pipelines. With structural MRI, I develop models that learn from clinical scores, PET and other
+          data available for only some patients, while needing only MRI at test time. A recurring question is
+          reliability: whether a finding, or a per-person explanation, holds up on a repeat scan or a new cohort.</p>
+          <p class="small"><a href="#research">Projects and latest paper</a> · <a href="software.html">mm-neuro software</a></p>
+        </section>
+        <section>
+          <h3>Vision-language models for medicine</h3>
+          <p>Radiology images come with reports and health records that already describe what is in them. My doctoral
+          work used this text as supervision: contrastive image-text models for chest X-rays that classify findings
+          without task training (zero-shot), that localise findings at patch level (Patch-CLIP), and that cope with rare,
+          long-tailed diseases and with biases between datasets. Related work tunes models to the operating point clinics
+          actually use, such as high sensitivity at fixed high specificity (AUCReshaping). With students, the same ideas
+          extend to prototype-based zero-shot classification and to retrieval-augmented diagnosis and report generation
+          for retinal images.</p>
+          <p class="small"><a href="#publications">Medical imaging AI papers</a> · <a href="#students">Student papers</a></p>
+        </section>
+        <section>
+          <h3>Detection and localisation across modalities</h3>
+          <p>Lesion detectors usually need many boxes drawn by experts for every new finding. I work on detectors that
+          are guided by a few example images or by text instead: Exemplar Med-DETR for lesions in mammography, chest
+          X-rays and angiography, and example-based grounding toward general-purpose detection models (EM-DETR). Student
+          projects carry this to multi-view mammography, coronary stenosis, organ localisation and trauma detection in
+          CT, and parameter-efficient segmentation in MRI.</p>
+          <p class="small"><a href="#publications">Medical imaging AI papers</a> · <a href="#students">Student papers</a></p>
+        </section>
+      </div>
+    </section>
+
+    <section class="panel" id="research" aria-labelledby="research-h" hidden>
+      <h2 id="research-h">Neurodegenerative disease research</h2>
+      <div class="cards">
+        <article class="card">
+          <div class="tags">rs-fMRI · reproducibility · ADNI, ABIDE, OASIS-3</div>
+          <h3><a href="research/harness.html">Benchmarking brain-connectivity prediction</a></h3>
+          <p>Published methods that predict cognitive scores from functional connectivity, reproduced under one
+          leakage-safe protocol, with preprocessing compared across four pipelines.</p>
+          <a class="more" href="research/harness.html">Read the project page</a>
+        </article>
+        <article class="card">
+          <div class="tags">rs-fMRI · network dynamics · Alzheimer's disease</div>
+          <h3><a href="research/dmn.html">Network dynamics in Alzheimer's disease</a></h3>
+          <p>How the default mode network and whole-brain dynamics reorganise across the Alzheimer's spectrum, tested
+          with pre-specified hypotheses and an independent replication cohort.</p>
+          <a class="more" href="research/dmn.html">Read the project page</a>
+        </article>
+        <article class="card">
+          <div class="tags">MRI · missing modalities · prototype learning</div>
+          <h3><a href="research/multimodal.html">Learning from partly paired modalities</a></h3>
+          <p>Using clinical, PET and other data that exist for only some patients to train better MRI models that need
+          only MRI at test time.</p>
+          <a class="more" href="research/multimodal.html">Read the project page</a>
+        </article>
+      </div>
+      <article class="card paper-wide">
+        <div class="tags">Latest paper · BVM 2027 · accepted for oral presentation</div>
+        <h3><a href="research/harness.html">Scan–Rescan Reliability of Individualized Network Attribution in
+        Resting-State Functional MRI</a></h3>
+        <p>Per-person explanations of which brain networks drive a connectivity-based cognition model are often proposed
+        as biomarkers. This paper tests how reliable they are across repeat scans, against a permutation null that
+        separates the person-specific part from the pattern everyone shares.</p>
+        <div class="venue">Bhat S., Chowdhury M.R., Shaik I.A., Bayer S., Bharat R.D., Maier A. · resting-state fMRI, ADNI</div>
+      </article>
+    </section>
+
+    <section class="panel" id="publications" aria-labelledby="publications-h" hidden>
+      <h2 id="publications-h">Medical imaging AI</h2>
+      <p>My doctoral and industry research on radiography: chest X-ray and mammography AI that works with limited
+      annotations and meets clinical operating points. My first-author papers in this area.</p>
+      <div class="cards papers">
+        <article class="card">
+          <div class="tags">Scientific Reports · 2023</div>
+          <h3><a href="https://doi.org/10.1038/s41598-023-48482-x">AUCReshaping</a></h3>
+          <p>Reshapes the ROC curve only inside a chosen sensitivity–specificity range, optimising sensitivity at a fixed
+          specificity through an iterative, AdaBoost-like scheme, for a practical chest X-ray AI system.</p>
+          <div class="venue">Improved sensitivity at high-specificity</div>
+        </article>
+        <article class="card">
+          <div class="tags">MICCAI · 2025</div>
+          <h3><a href="https://doi.org/10.1007/978-3-032-04978-0_20">Exemplar Med-DETR</a></h3>
+          <p>A multi-modal contrastive detector that learns class-specific features, for lesion detection across
+          mammography, chest X-rays and angiography, including dense breasts.</p>
+          <div class="venue">Toward Generalized and Robust Lesion Detection in Mammogram Images and Beyond</div>
+        </article>
+        <article class="card">
+          <div class="tags">BVM · 2025</div>
+          <h3><a href="https://doi.org/10.1007/978-3-658-47422-5_42">Robust zero-shot chest X-ray classification</a></h3>
+          <p>How batch size, dataset diversity and distribution bias between chest X-ray datasets affect CLIP-style
+          zero-shot classification, and how multi-dataset training and contrastive strategies make it more robust.</p>
+          <div class="venue">Towards robust zero-shot CXR classification: exploring data distribution bias in CXR datasets</div>
+        </article>
+        <article class="card">
+          <div class="tags">Scientific Reports · 2026</div>
+          <h3><a href="https://doi.org/10.1038/s41598-026-52235-x">Patch-CLIP</a></h3>
+          <p>Joint training of chest X-rays with health records, adding a patch-level embedding loss so the model learns
+          where findings are, not only whether they are present.</p>
+          <div class="venue">Contrastive Health Record-Image Joint Training with Patch Embedding Loss</div>
+        </article>
+        <article class="card">
+          <div class="tags">CVIP · 2026</div>
+          <h3><a href="https://arxiv.org/abs/2611.14518">EM-DETR</a></h3>
+          <p>Example-based grounding as a route to foundation detection models that find new kinds of findings from a few
+          examples.</p>
+          <div class="venue">Toward Foundation Detection Models via Example-Based Grounding in EM-DETR</div>
+        </article>
+        <article class="card">
+          <div class="tags">European Congress of Radiology · 2026</div>
+          <h3><a href="https://doi.org/10.26044/ecr2026/C-12946">Chest radiographs without task training</a></h3>
+          <p>Chest radiograph classification without training on the target task, through improved alignment between
+          images and text.</p>
+          <div class="venue">Robust AI-Based Chest Radiograph Classification Without Prior Task Training via Improved Vision-Language Alignment</div>
+        </article>
+        <article class="card">
+          <div class="tags">MICCAI · 2025</div>
+          <h3><a href="https://doi.org/10.1007/978-3-032-25244-9_22">Clinical usability of radiographic AI</a></h3>
+          <p>A summary of my doctoral research: deep learning for radiographic diagnosis under the constraints of
+          clinical specificity, limited data and limited annotation.</p>
+          <div class="venue">Improving Clinical Usability of Deep Learning for Radiographic Diagnosis: Learning under Constraints of Specificity, Data, and Annotation</div>
+        </article>
+      </div>
+      <p class="small muted">Co-authored work and patents are listed on my
+      <a href="https://lme.tf.fau.de/persons/sheethal-bhat/">lab profile</a>.</p>
+    </section>
+
+    <section class="panel" id="students" aria-labelledby="students-h" hidden>
+      <h2 id="students-h">Student work</h2>
+      <p>I have supervised more than 20 students at the Pattern Recognition Lab. These papers came out of their projects,
+      with the students as first authors, newest first.</p>
+      <div class="cards papers">
+        <article class="card">
+          <div class="tags">SPIE Medical Imaging · 2027</div>
+          <h3><a href="https://arxiv.org/abs/2604.18444">ProtoCLIP</a></h3>
+          <p>Prototype-aligned latent refinement for robust zero-shot chest X-ray classification.</p>
+          <div class="venue">Kittler F., Bhat S., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">IEEE NSS/MIC · 2026</div>
+          <h3><a href="https://arxiv.org/abs/2603.12514">CT-VDETR</a></h3>
+          <p>Semi-supervised 3D trauma detection in CT scans using dense vertex relative position encoding.</p>
+          <div class="venue">Chaudhary S., Bhat S., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">MI4MedFM workshop, MICCAI · 2026</div>
+          <h3><a href="https://arxiv.org/abs/2603.17576">LoGSAM</a></h3>
+          <p>Parameter-efficient cross-modal grounding for MRI segmentation.</p>
+          <div class="venue">Islam Bhuiyan M.R., Bhat S., Qahqaie M., Nguyen T.T., Perez-Toro P.A., Arias-Vergara T., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">OMIA workshop, MICCAI · 2026</div>
+          <h3><a href="https://arxiv.org/abs/2605.06173">Retina-RAG</a></h3>
+          <p>Retrieval-augmented vision-language modelling for joint retinal diagnosis and clinical report generation.</p>
+          <div class="venue">Zaian A., Bhat S., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">BAIOSPHERE Medical · 2026</div>
+          <h3><a href="https://doi.org/10.25593/978-3-96147-958-0">CT-3GDINO</a></h3>
+          <p>Pseudo-text-conditioned 3D Grounding DINO for organ localisation in abdominal CT.</p>
+          <div class="venue">Chen S., Gong H., Hou K., Yang J., Bhat S., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">BAIOSPHERE Medical · 2026</div>
+          <h3><a href="https://doi.org/10.25593/978-3-96147-958-0">CNNs vs transformers for abdominal organs</a></h3>
+          <p>Benchmarking CNN-based against transformer-based models for abdominal multi-organ segmentation on the RATIC
+          dataset.</p>
+          <div class="venue">Bayer L., Bhat S., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">MICCAI · 2025</div>
+          <h3><a href="https://doi.org/10.1007/978-3-032-04981-0_12">CXR-CML</a></h3>
+          <p>Zero-shot classification of rare, long-tailed chest X-ray findings, by adjusting a CLIP model's latent space
+          per class with mixture-model clustering and a tailored metric loss.</p>
+          <div class="venue">Madhipati R., Bhat S., Bueß L., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">Deep Breath workshop, MICCAI · 2025</div>
+          <h3><a href="https://lme.tf.fau.de/persons/sheethal-bhat/">MM-DETR</a></h3>
+          <p>Multi-view, multi-modal mammography mass detection that emulates the clinical diagnostic workflow.</p>
+          <div class="venue">Elbarbary K., Bhandary Panambur A., Bhat S., Bayer S., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">BVM · 2025</div>
+          <h3><a href="https://lme.tf.fau.de/persons/sheethal-bhat/">BioBERT for zero-shot chest X-rays</a></h3>
+          <p>Zero-shot chest X-ray diagnosis combining BioBERT text representations with CLIP-style contrastive learning,
+          with synthetic reports to fill missing text.</p>
+          <div class="venue">Bharadwaj P., Bhat S., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">arXiv · 2025</div>
+          <h3><a href="https://arxiv.org/abs/2503.13134">CLIP for chest X-ray analysis</a></h3>
+          <p>Integrating CLIP with advanced techniques to improve zero-shot learning for chest X-ray analysis.</p>
+          <div class="venue">Bharadwaj P., Bhat S., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">arXiv · 2025</div>
+          <h3><a href="https://arxiv.org/abs/2503.01601">Stenosis detection</a></h3>
+          <p>Evaluating Grounding DINO, YOLO and DINO-DETR for detecting coronary stenosis.</p>
+          <div class="venue">Ansari M., Bhat S., Maier A.</div>
+        </article>
+        <article class="card">
+          <div class="tags">arXiv · 2025</div>
+          <h3><a href="https://arxiv.org/abs/2406.16143">Zero- and few-shot AI in medicine</a></h3>
+          <p>A review of zero-shot and few-shot AI algorithms in the medical domain.</p>
+          <div class="venue">Badawi M., Mohammedyahia A., Bhat S., Maier A.</div>
+        </article>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <p>Research descriptions on this site cover aims and methods. Results are added once they are published.</p>
+  <p>Text on this site is licensed under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>; the
+  portrait photo is excluded.</p>
+</div></footer>
+<script src="assets/tiles.js"></script>
+</body>
+</html>
