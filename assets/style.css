@@ -164,9 +164,11 @@ footer .wrap { padding-block: 1.4rem 2rem; }
 .area-text section { display: grid; gap: .5rem; padding-left: 1rem; border-left: 2px solid var(--accent-bg); }
 .area-text h3 { color: var(--accent); }
 
-/* paragraphs justified on both sides, with hyphenation to avoid wide gaps */
-main p, .sheet p, main li, .sheet li, figcaption { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
-.tile-d, .card .tags, .card .venue, .cites, .role, .eyebrow { text-align: left; }
+/* only the running body text is justified (bio, section intros, long paragraphs); short lines, contact,
+   lists, captions and card blurbs stay left-aligned */
+.who > p:not(.role), main > p:not(.small):not(.muted):not(.note), .panel > p:not(.small):not(.muted),
+.area-text p:not(.small) { text-align: justify; hyphens: auto; -webkit-hyphens: auto; }
+.contact-h + p { text-align: left; }
 
 /* links and labels in cards */
 .card { grid-template-rows: auto auto 1fr auto; }
