@@ -189,3 +189,5 @@ a.tile { text-decoration: none; }
 .cards.papers .card, .paper-wide { border-top-color: var(--accent); border-left-color: var(--accent); }
 .paper-wide { border-top-color: var(--rule); }
 .sheet-close:hover { color: var(--accent); border-color: var(--accent); }
+address.contact { font-style: normal; text-align: left; line-height: 1.7; }
+.contact-links { display: inline-block; margin-top: .35rem; }
